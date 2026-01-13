@@ -1,0 +1,67 @@
+name: Godot CI
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test (Headless)
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.2-mono
+
+    steps:
+      # Check out the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Run tests in headless mode
+      - name: Run Tests
+        run: |
+          godot --headless --path . --script tests/test.gd
+        continue-on-error: true
+
+      # Validate scene files
+      - name: Validate Scenes
+        run: |
+          for scene in $(find . -name "*.tscn"); do
+            echo "Validating $scene"
+            godot --headless --check-only "$scene" || exit 1
+          done
+
+  export:
+    name: Export
+    needs: test
+    runs-on: ubuntu-latest
+    container:
+      image: barichello/godot-ci:4.2-mono
+
+    strategy:
+      matrix:
+        platform:
+          - Windows Desktop
+          - Linux/X11
+          - macOS
+          - Web
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Export Templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          ls /root/.local/share/godot/export_templates/
+
+      - name: Export ${{ matrix.platform }}
+        run: |
+          godot --headless --export "${{ matrix.platform }}" "build/game_${{ matrix.platform }}"
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: game-${{ matrix.platform }}
+          path: build/game_*
