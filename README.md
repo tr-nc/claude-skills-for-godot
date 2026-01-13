@@ -4,61 +4,28 @@ A comprehensive skill set for developing Godot games using **command-line only**
 
 ## Goal
 
-Enable developers to build complete Godot games entirely through terminal commands, scripts, and code. This enables:
-- Headless/server builds
-- CI/CD integration
-- Automated testing pipelines
-- Vim/Emacs-based development workflows
-- Remote development environments
+Enable Claude Code to develop complete Godot games entirely through terminal commands and code. The skill set provides:
 
-## Development Plan
+1. **Curated CLI Documentation** - Clean, filtered Godot docs with only CLI-relevant content
+2. **Reference Menu** - Easy navigation for Claude to find the right documentation
+3. **Command-Line Workflows** - All operations possible without the GUI editor
+4. **Drop-In Integration** - Clone, bootstrap, and it just works
 
-### Phase 1: Documentation Curation
-- [ ] Keep CLI-relevant documentation
-  - Command line tutorial (`tutorials/editor/command_line_tutorial.html`)
-  - Export from CLI (`tutorials/export/exporting_projects.html`)
-  - Asset pipeline automation (`tutorials/assets_pipeline/`)
-  - Project configuration files
-  - Scripting references (GDScript, C#)
+## How It Works
 
-- [ ] Delete GUI-specific documentation
-  - `tutorials/ui/` - Visual UI editor
-  - `tutorials/2d/` - 2D viewport editor
-  - `tutorials/3d/` - 3D viewport editor
-  - `tutorials/animation/` - Animation timeline editor
-  - `tutorials/editor/inspector_dock.html`
-  - `tutorials/editor/project_manager.html`
-  - `getting_started/` - GUI-based tutorials
+```
+1. Clone this repo
+2. Run ./bootstrap.sh (downloads, filters, organizes docs)
+3. Copy to ~/.config/claude/skills/godot/
+4. Claude Code can now develop Godot games!
+```
 
-### Phase 2: Core Skills
-- [ ] `godot-init` - Initialize new project from CLI
-- [ ] `godot-run` - Run game with CLI flags
-- [ ] `godot-export` - Export to target platforms
-- [ ] `godot-test` - Run tests in headless mode
-- [ ] `godot-bundle` - Create PCK/ZIP packs
-
-### Phase 3: Scene Management Skills
-- [ ] `godot-scene-create` - Create .tscn files programmatically
-- [ ] `godot-scene-add-node` - Add nodes to scenes via CLI
-- [ ] `godot-resource-create` - Create .tres resource files
-- [ ] `godot-project-config` - Modify project.godot settings
-
-### Phase 4: Asset Pipeline Skills
-- [ ] `godot-import` - Import assets via CLI
-- [ ] `godot-export-asset` - Export 3D scenes
-- [ ] `godot-asset-bundle` - Bundle asset packs
-
-### Phase 5: Development Skills
-- [ ] `godot-hot-reload` - Live reload during development
-- [ ] `godot-debug-cli` - Debug output to terminal
-- [ ] `godot-profile` - Performance profiling from CLI
-- [ ] `godot-log` - Parse and filter game logs
-
-### Phase 6: CI/CD Integration
-- [ ] GitHub Actions workflows
-- [ ] Docker build environments
-- [ ] Automated testing suites
-- [ ] Multi-platform export automation
+The `bootstrap.sh` script:
+- Downloads the official Godot HTML documentation
+- **Removes GUI-specific tutorials** (2D/3D editor, UI, Animation timeline)
+- **Keeps CLI-relevant content** (command line, export, scripting, API reference)
+- Creates an organized navigation menu (MENU.md)
+- Produces a clean, referenceable documentation structure
 
 ## CLI Reference
 
@@ -84,33 +51,49 @@ godot --version
 godot --help
 ```
 
-## Documentation Key
+## Documentation Structure
 
-### Keep (CLI-Relevant)
-- `tutorials/editor/command_line_tutorial.html`
-- `tutorials/export/exporting_projects.html`
-- `tutorials/export/exporting_pcks.html`
-- `tutorials/assets_pipeline/import_process.html`
-- `tutorials/scripting/filesystem.html`
-- `tutorials/scripting/gdscript/`
-- `classes/` - API reference
+After bootstrapping, the `docs/` folder contains:
 
-### Delete (GUI-Specific)
-- `tutorials/ui/`
-- `tutorials/2d/`
-- `tutorials/3d/`
-- `tutorials/animation/`
+```
+docs/
+├── MENU.md                    # Navigation menu for Claude
+├── cli/                       # Command-line essentials
+│   ├── command_line_tutorial.html
+│   └── exporting_projects.html
+├── scripting/                 # GDScript and programming
+│   ├── gdscript_basics.html
+│   ├── filesystem.html
+│   └── resources.html
+├── assets/                    # Asset pipeline automation
+│   └── import_process.html
+├── classes/                   # Full API reference (1000+ classes)
+└── export/                    # Platform-specific export guides
+    ├── android.html
+    ├── ios.html
+    ├── web.html
+    └── ...
+```
+
+### Removed (GUI-Specific)
+- `tutorials/ui/` - Visual UI editor tutorials
+- `tutorials/2d/` - 2D viewport editor
+- `tutorials/3d/` - 3D viewport editor
+- `tutorials/animation/` - Animation timeline editor
+- `getting_started/` - GUI-based first game tutorials
 - `tutorials/editor/inspector_dock.html`
 - `tutorials/editor/project_manager.html`
-- `getting_started/`
 
-## Setup
+## Development
+
+### Testing Bootstrap
 
 ```bash
-# Bootstrap documentation
-./bootstrap.sh
+# Clean docs folder (keep .gitkeep)
+find docs/ -mindepth 1 -not -name ".gitkeep" -delete
 
-# Skills will be installed to ~/.config/claude/skills/
+# Run bootstrap
+./bootstrap.sh
 ```
 
 ## Contributing
