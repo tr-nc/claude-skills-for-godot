@@ -6,3 +6,6 @@ docs/*
 objects.inv
 robots.txt
 searchindex.js
+
+# Ignore downloaded zip during bootstrap
+godot-docs-html-stable.zip
