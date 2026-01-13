@@ -11,6 +11,10 @@ Enable Claude Code to develop complete Godot games entirely through terminal com
 3. **Command-Line Workflows** - All operations possible without the GUI editor
 4. **Drop-In Integration** - Clone, bootstrap, and it just works
 
+## Quick Start
+
+**New to Godot CLI?** See [QUICKSTART.md](QUICKSTART.md) for a 5-minute getting started guide.
+
 ## How It Works
 
 ```
@@ -99,6 +103,15 @@ find docs/ -mindepth 1 -not -name ".gitkeep" -delete
 ## Contributing
 
 This project prioritizes terminal-first workflows. All skills should work without the Godot Editor GUI.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## Resources
+
+- **[Quick Start Guide](QUICKSTART.md)** - Get started in 5 minutes
+- **[skill.md](skill.md)** - Skill descriptor for Claude Code
+- **[Examples](examples/)** - Sample scenes and scripts
+- **[.github/workflows/godot-ci.yml](.github/workflows/godot-ci.yml)** - CI/CD example
 
 ## License
 
