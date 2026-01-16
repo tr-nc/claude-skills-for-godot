@@ -13,9 +13,31 @@ if [ ! -f "$ZIP_FILE" ]; then
     exit 1
 fi
 
-# Prepare cache directory and unzip there
-echo "Extracting documentation to $CACHE_DIR..."
-mkdir -p "$CACHE_DIR"
-unzip -q -o "$ZIP_FILE" -d "$CACHE_DIR"
+# Create a temp directory for extraction
+TEMP_DIR="$CACHE_DIR/temp_extract"
+rm -rf "$TEMP_DIR"
+mkdir -p "$TEMP_DIR"
 
-echo "Success: Documentation extracted to $CACHE_DIR/godot-docs-html-stable/"
+echo "Extracting documentation to temp directory..."
+unzip -q -o "$ZIP_FILE" -d "$TEMP_DIR"
+
+# Move contents to the target directory
+# The zip may contain files directly in the root or in a subdirectory
+# We'll move everything to godot-docs-html-stable/
+TARGET_DIR="$CACHE_DIR/godot-docs-html-stable"
+rm -rf "$TARGET_DIR"
+mkdir -p "$TARGET_DIR"
+
+# If there's a single subdirectory in the temp dir, move its contents up
+if [ "$(find "$TEMP_DIR" -mindepth 1 -maxdepth 1 -type d | wc -l)" -eq 1 ]; then
+    SINGLE_DIR=$(find "$TEMP_DIR" -mindepth 1 -maxdepth 1 -type d)
+    mv "$SINGLE_DIR"/* "$TARGET_DIR/"
+else
+    # Otherwise move all contents directly
+    mv "$TEMP_DIR"/* "$TARGET_DIR/"
+fi
+
+# Clean up temp directory
+rm -rf "$TEMP_DIR"
+
+echo "Success: Documentation extracted to $TARGET_DIR/"

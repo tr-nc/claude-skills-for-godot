@@ -2,6 +2,18 @@
 
 A plain-text Godot engine reference optimized for LLM readability. This repository provides a compact, text-only version of the Godot documentation, making it easy for AI agents to understand every feature and API of the engine.
 
+## Installation
+
+Clone this repository to your Claude Code skills directory:
+
+```bash
+# Create the skills directory if it doesn't exist
+mkdir -p ~/.claude/skills
+
+# Clone the repository
+git clone https://github.com/tr-nc/claude-skills-for-godot ~/.claude/skills/godot
+```
+
 ## Setup
 
 The easiest way to get started is to run the bootstrap script:
