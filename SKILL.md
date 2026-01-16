@@ -1,5 +1,5 @@
 ---
-name: "Godot CLI"
+name: "godot"
 description: "Create and build Godot games using command-line only, without the Godot Editor GUI. Includes CLI documentation, export automation, script-first workflows, and headless development."
 ---
 
