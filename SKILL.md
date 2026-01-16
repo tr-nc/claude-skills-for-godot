@@ -83,3 +83,63 @@ godot --headless --script main.gd
 │   └── classes/    # Full API reference
 └── SKILL.md        # This file
 ```
+
+---
+
+# General Godot Development Knowledge
+
+## Running Godot Projects
+
+Launch the Godot editor and run a project from the project directory:
+```bash
+godot .
+```
+
+## Testing Modes
+
+### Headless Mode (No GUI)
+Useful for automated testing and CI/CD:
+```bash
+godot --headless --quit-after 10
+```
+Runs without GUI, loads project, checks for errors, and exits automatically after N seconds.
+
+### Script-Driven Testing
+Run a specific test script:
+```bash
+godot --headless --script test.gd
+```
+
+### Important Note
+The standard `godot .` editor mode does **NOT** auto-reload code changes. Use headless mode or restart the editor after code modifications to see changes take effect.
+
+## Log File Location
+
+Godot logs are stored in a platform-specific user data directory:
+
+**Linux:**
+```
+~/.local/share/godot/app_userdata/<project_name>/logs/godot.log
+```
+
+**macOS:**
+```
+~/Library/Application Support/Godot/app_userdata/<project_name>/logs/godot.log
+```
+
+**Windows:**
+```
+%APPDATA%\Godot\app_userdata\<project_name>\logs\godot.log
+```
+
+The most recent log file will be named `godot.log` or have a timestamp. This is essential for debugging runtime issues.
+
+## Self-Testing Workflow
+
+**CRITICAL**: After modifying any code, you MUST:
+
+1. **Run the project** using appropriate mode (headless for quick checks, editor for interactive testing)
+2. **Inspect the log file** for errors, warnings, or unexpected behavior
+3. **Verify the changes work correctly** by checking the log output
+
+This ensures code changes are tested immediately and issues are caught early.
