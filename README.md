@@ -1,47 +1,61 @@
-# Claude Skills for Godot
+# Godot CLI Skill for Claude Code
 
-A plain-text Godot engine reference optimized for LLM readability. This repository provides a compact, text-only version of the Godot documentation, making it easy for AI agents to understand every feature and API of the engine.
+A Claude Code skill for creating and building Godot games from the command line—no editor required.
 
-## Installation
+> **Platform Support**: macOS and Linux only. Windows is not currently supported.
 
-Clone this repository to your Claude Code skills directory:
+## Quick Start
+
+### 1. Install
 
 ```bash
-# Create the skills directory if it doesn't exist
 mkdir -p ~/.claude/skills
-
-# Clone the repository
 git clone https://github.com/tr-nc/claude-skills-for-godot ~/.claude/skills/godot
 ```
 
-## Setup
+### 2. Bootstrap
 
-The easiest way to get started is to run the bootstrap script:
+Run the bootstrap script to download and prepare the documentation:
 
 ```bash
-./tools/bootstrap.sh
+cd ~/.claude/skills/godot
+./bootstrap.sh
 ```
 
-This will automatically handle downloading, extracting, and processing the documentation.
+### 3. Use
 
-### Individual Steps
+Ask Claude to help you with Godot CLI tasks:
 
-If you need more control, you can run the steps manually:
+- *"Create a new Godot project from the terminal"*
+- *"Export my game for Windows Desktop"*
+- *"Show me Godot CLI command flags"*
 
-1. **Download**: `./tools/download.sh` (Downloads zip to `cache/`)
-2. **Extract**: `./tools/extract.sh` (Unzips into `cache/`)
-3. **Process**: `./tools/process.sh` (Generates LLM-ready docs in `docs/godot-docs/`)
+## What This Skill Does
 
-## Usage
-
-Provide the `docs/godot-docs/` folder to your LLM. It contains a comprehensive knowledge base:
-
-- **API Reference**: `docs/godot-docs/classes/`
-- **Tutorials**: `docs/godot-docs/tutorials/`
-- **Getting Started**: `docs/godot-docs/getting_started/`
+- **CLI Documentation**: Command-line references for all Godot features
+- **Export Automation**: Build and export projects without the editor
+- **Script-First Workflow**: Create scenes and resources via code
+- **Headless Development**: Run and test games without GUI
 
 ## Project Structure
 
-- `tools/`: Scripts for downloading, extracting, and processing.
-- `cache/`: (Gitignored) Raw zip and extracted source files.
-- `docs/godot-docs/`: The final processed reference for AI use.
+```
+.
+├── bootstrap.sh    # Download and prepare docs
+├── docs/           # CLI-curated documentation
+│   ├── MENU.md     # Documentation navigation
+│   ├── cli/        # Command line essentials
+│   ├── scripting/  # GDScript and programming
+│   ├── export/     # Export guides per platform
+│   └── classes/    # Full API reference
+├── tools/          # Bootstrap scripts
+└── SKILL.md        # Skill instructions for Claude
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to open a pull request.
+
+## License
+
+MIT
