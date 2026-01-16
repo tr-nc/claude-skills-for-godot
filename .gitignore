@@ -1,0 +1,12 @@
+# Ignore docs folder contents, but keep .gitkeep
+docs/*
+!docs/.gitkeep
+
+# Ignore extracted root files from godot-docs zip
+objects.inv
+robots.txt
+searchindex.js
+
+# Ignore downloaded zip during bootstrap
+cache/
+godot-docs-html-stable.zip
